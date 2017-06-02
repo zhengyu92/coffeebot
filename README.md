@@ -4,6 +4,11 @@ CoffeeBot is a Slack Bot build from JBot. It takes in orders from multiple users
 
 ## SlackBot
 
+**TO-DO**
+1. Commands should be in `switch` case
+2. Understand how to pass `session` and `event`
+3. Get the users first name from class User -> getProfile() -> getFirstName() working. 
+
 ### Getting started
 
 **Running your CoffeeBot is just 4 easy steps:**
