@@ -36,12 +36,19 @@ public class SBMenu {
         MenuItem drink3 = new MenuItem("white chocolate mocha", 3.75);
         MenuItem drink4 = new MenuItem("freshly brewed coffee", 1.85);
         MenuItem drink5 = new MenuItem("iced coffee", 2.25);
+        MenuItem drink6 = new MenuItem("cinnamon dolce latte", 3.65);
+        MenuItem drink7 = new MenuItem("skinny vanilla latte", 3.45);
+        MenuItem drink8 = new MenuItem("caramel macchiato", 3.75);
 
         menuList.put(drink1.getDrinkName(), drink1);
         menuList.put(drink2.getDrinkName(), drink2);
         menuList.put(drink3.getDrinkName(), drink3);
         menuList.put(drink4.getDrinkName(), drink4);
         menuList.put(drink5.getDrinkName(), drink5);
+        menuList.put(drink6.getDrinkName(), drink6);
+        menuList.put(drink7.getDrinkName(), drink7);
+        menuList.put(drink8.getDrinkName(), drink7);
+
     }
 
     public double getPrice(String drinkName) {
