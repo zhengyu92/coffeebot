@@ -40,7 +40,7 @@ public class SlackBot extends Bot {
     private static final String MESSAGE_NO_ORDERS = "You have no orders! Try adding one with 'add'!";
 
     // Orders saved in memory
-    private static List<Order> orders = new ArrayList<>();
+    private static List<Order> orders;
 
     // SBMenu
     private static final List<String> MENU_STARBUCKS = new ArrayList<>(Arrays.asList("starbucks"));
@@ -64,7 +64,21 @@ public class SlackBot extends Bot {
         return this;
     }
 
+    private List<Order> loadInitialOrders() {
+        List<Order> result = new ArrayList<>();
+        result.add(new Order("U12a","Patrick", "iced coffee"));
+        result.add(new Order("-1", "Patrick", "caffe latte"));
+        result.add(new Order("-2", "Eoin", "caffe latte"));
+        result.add(new Order("-2", "Silas", "caffe mocha"));
+        result.add(new Order("-2", "Luka", "caffe mocha"));
+        result.add(new Order("-2", "Richard", "freshly brewed coffee"));
+        result.add(new Order("-3", "Regina", "iced coffee"));
+        result.add(new Order("-4", "Sam", "iced coffee"));
+        result.add(new Order("-4", "Ten Zing", "caffe latte"));
+        result.add(new Order("-4", "Justin", "cinnamon dolce latte"));
 
+        return result;
+    }
 
     /** receives a direct mention (@ontheball) */
     @Controller(events = {EventType.DIRECT_MENTION})
@@ -98,9 +112,8 @@ public class SlackBot extends Bot {
     @Controller(events = {EventType.MESSAGE})
     public void onReceiveAdd(WebSocketSession session, Event event) {
         String text = event.getText();
-//        User user = event.getUser();
-//        logger.info("User: {}", user.getName());
 
+        orders = loadInitialOrders();
 
         if (getFirstWord(text).toLowerCase().equals("add")) {
             logger.info("Adding this order: {}", text);
@@ -110,18 +123,18 @@ public class SlackBot extends Bot {
             //String userName = "Zheng Yu";
 
             // Todo : get userName working
-            String firstName = event.getUser().getProfile().getFirstName();     // NullPointerException
+            // String firstName = event.getUser().getProfile().getFirstName();     // NullPointerException
 
             // Hardcode to get userName out
-//            if(userId.equals("U23KRCPH6")) {
-//                String userName = "Lopez";
-//                viewAdded(event, session, userId, drink, userName);
-//            }
-//            if(userId.equals("U3SKJQNPP")) {
-//                String userName = "Zheng Yu";
-//                viewAdded(event, session, userId, drink, userName);
-//            }
-            viewAdded(event, session, userId, drink, firstName);
+            if(userId.equals("U23KRCPH6")) {
+                String userName = "Lopez";
+                viewAdded(event, session, userId, drink, userName);
+            }
+            if(userId.equals("U3SKJQNPP")) {
+                String userName = "Zheng Yu";
+                viewAdded(event, session, userId, drink, userName);
+            }
+            // viewAdded(event, session, userId, drink, firstName);
         }
     }
 
@@ -343,6 +356,8 @@ public class SlackBot extends Bot {
     private static String getNoOrdersMessage() { return MESSAGE_NO_ORDERS; }
 
     private static String loadSBMenuURL() { return "https://www.menuwithprice.com/menu/starbucks/"; }
+
+
 
 //    private static String collateOrders() {
 //        for(int i=0; i<)
