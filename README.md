@@ -10,7 +10,7 @@ CoffeeBot is a Slack Bot build from JBot. It takes in orders from multiple users
   
 1. Clone this project `$ git clone git@github.com:zhengyu92/coffeebot.git` and `$ cd coffeebot`.  
 2. [Create a slack bot](https://my.slack.com/services/new/bot) and get your slack token.  
-3. Paste the token in [application.properties] called `slackBotToken`(/coffee/src/main/resources/application.properties) file.  
+3. Paste the token in [application.properties](/coffee/src/main/resources/application.properties) file called `slackBotToken`.  
 4. Run the application by running `JBotApplication` in your IDE or via commandline: 
 ```
 $ cd coffeebot
