@@ -101,26 +101,33 @@ public class SlackBot extends Bot {
 //        User user = event.getUser();
 //        logger.info("User: {}", user.getName());
 
+
         if (getFirstWord(text).toLowerCase().equals("add")) {
             logger.info("Adding this order: {}", text);
 
             String userId = event.getUserId();
             String drink = removeFirstWord(text).toLowerCase();
-//            User userName = event.getUser();
-            if(userId.equals("U41RNK43C")) {
-                String userName = "Hazel";
-                viewAdded(event, session, userId, drink, userName);
-            }
-            if(userId.equals("U41RLMS9Y")) {
-                String userName = "Zheng Yu";
-                viewAdded(event, session, userId, drink, userName);
-            }
             //String userName = "Zheng Yu";
+
+            // Todo : get userName working
+            String firstName = event.getUser().getProfile().getFirstName();     // NullPointerException
+
+            // Hardcode to get userName out
+//            if(userId.equals("U23KRCPH6")) {
+//                String userName = "Lopez";
+//                viewAdded(event, session, userId, drink, userName);
+//            }
+//            if(userId.equals("U3SKJQNPP")) {
+//                String userName = "Zheng Yu";
+//                viewAdded(event, session, userId, drink, userName);
+//            }
+            viewAdded(event, session, userId, drink, firstName);
         }
     }
 
     private void viewAdded(Event event, WebSocketSession session, String userId, String drink, String userName) {
         logger.info("storing: {}, {}, {}", userId, userName, drink);
+
         orders.add(new Order(userId, userName, drink));
 
         //load menu
@@ -228,7 +235,7 @@ public class SlackBot extends Bot {
                 totalPayable += numItems * menuMap.get(getMenuName()).getPrice(key);
                 builder.append("\n");
             }
-            builder.append("\n *$" + new DecimalFormat("0.00").format(totalPayable) + "*\n\n");
+            builder.append("\n*Total: $" + new DecimalFormat("0.00").format(totalPayable) + "*\n\n");
             builder.append("If you are ready to order, type the `order` command!");
             reply(session, event, new Message(builder.toString())   );
         }
