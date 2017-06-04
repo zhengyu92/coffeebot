@@ -1,5 +1,7 @@
 # CoffeeBot
 
+<img src="coffeebot.png" width="300"><br>
+
 CoffeeBot is a Slack Bot build from JBot. It takes in orders from multiple users in Slack's Direct Messages and collate them in total so that it will be easier for the one guy to order.
 
 ## SlackBot
